@@ -24,7 +24,9 @@
             }
 
             // 問題表示
+            Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine($"Q{questionIndex}:");
+            Console.ResetColor();
             foreach (var v in nums)
             {
                 Console.WriteLine($"{v}");
@@ -54,11 +56,15 @@
             {
                 if (int.Parse(guess) == answer)
                 {
+                    Console.ForegroundColor = ConsoleColor.Green;
                     Console.WriteLine("正解です！");
+                    Console.ResetColor();
                 }
                 else
                 {
+                    Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("不正解です。正解は " + answer + " です。");
+                    Console.ResetColor();
                 }
                 Console.WriteLine("--------------------------");
             }
