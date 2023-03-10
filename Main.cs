@@ -2,7 +2,7 @@
 {
     static readonly int numCount = 5;
     static readonly int numRangeMax = 1000;
-    static readonly int numRangeMin = 0;
+    static readonly int numRangeMin = -1000;
 
     static void Main()
     {
@@ -38,15 +38,42 @@
             do
             {
                 input = Console.ReadKey(true);
-                if (input.Key != ConsoleKey.Enter && input.KeyChar >= '0' && input.KeyChar <= '9')
-                {
-                    guess += input.KeyChar;
-                    Console.Write(input.KeyChar);
-                }
-                else if (input.Key == ConsoleKey.Backspace && guess.Length > 0)
+                if (input.Key == ConsoleKey.Backspace && guess.Length > 0)
                 {
                     guess = guess.Remove(guess.Length - 1);
                     Console.Write("\b \b");
+                }
+                else if (input.Key != ConsoleKey.Enter &&
+                (input.KeyChar == '-' || (input.KeyChar >= '0' && input.KeyChar <= '9')))
+                {
+                    if (guess.Length > 0)
+                    {
+                        if (guess.Length == 1)
+                        {
+                            var startNum = guess[0] == '-' ? '1' : '0';
+                            if (input.KeyChar >= startNum && input.KeyChar <= '9')
+                            {
+                                guess += input.KeyChar;
+                                Console.Write(input.KeyChar);
+                            }
+                        }
+                        else
+                        {
+                            if (input.KeyChar >= '0' && input.KeyChar <= '9')
+                            {
+                                guess += input.KeyChar;
+                                Console.Write(input.KeyChar);
+                            }
+                        }
+                    }
+                    else
+                    {
+                        if (input.KeyChar == '-' || (input.KeyChar >= '1' && input.KeyChar <= '9'))
+                        {
+                            guess += input.KeyChar;
+                            Console.Write(input.KeyChar);
+                        }
+                    }
                 }
             } while (input.Key != ConsoleKey.Enter && input.Key != ConsoleKey.Escape);
 
