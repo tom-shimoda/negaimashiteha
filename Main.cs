@@ -41,6 +41,11 @@
                     guess += input.KeyChar;
                     Console.Write(input.KeyChar);
                 }
+                else if (input.Key == ConsoleKey.Backspace && guess.Length > 0)
+                {
+                    guess = guess.Remove(guess.Length - 1);
+                    Console.Write("\b \b");
+                }
             } while (input.Key != ConsoleKey.Enter && input.Key != ConsoleKey.Escape);
 
             Console.WriteLine();
