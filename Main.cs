@@ -43,8 +43,7 @@
                     guess = guess.Remove(guess.Length - 1);
                     Console.Write("\b \b");
                 }
-                else if (input.Key != ConsoleKey.Enter &&
-                (input.KeyChar == '-' || (input.KeyChar >= '0' && input.KeyChar <= '9')))
+                else if (input.KeyChar == '-' || (input.KeyChar >= '0' && input.KeyChar <= '9'))
                 {
                     if (guess.Length > 0)
                     {
@@ -75,7 +74,8 @@
                         }
                     }
                 }
-            } while (input.Key != ConsoleKey.Enter && input.Key != ConsoleKey.Escape);
+            } while (input.Key != ConsoleKey.Escape &&
+                     (guess.Length <= 0 || guess == "-" || input.Key != ConsoleKey.Enter));
 
             Console.WriteLine();
 
@@ -91,6 +91,14 @@
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("不正解です。正解は " + answer + " です。");
+                    for (int i = 1; i < nums.Count; i++)
+                    {
+                        int maxDigits = Math.Max(Math.Abs(numRangeMin).ToString().Length,
+                            Math.Abs(numRangeMax).ToString().Length);
+                        var n1 = nums[i - 1].ToString().PadLeft(maxDigits);
+                        var n2 = nums[i].ToString().PadLeft(maxDigits);
+                        Console.WriteLine($"{n1} + {n2} = {nums[i - 1] + nums[i]}");
+                    }
                     Console.ResetColor();
                 }
                 Console.WriteLine("--------------------------");
