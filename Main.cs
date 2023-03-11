@@ -91,13 +91,15 @@
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("不正解です。正解は " + answer + " です。");
+                    var total = nums[0];
                     for (int i = 1; i < nums.Count; i++)
                     {
                         int maxDigits = Math.Max(Math.Abs(numRangeMin).ToString().Length,
                             Math.Abs(numRangeMax).ToString().Length);
                         var n1 = nums[i - 1].ToString().PadLeft(maxDigits);
                         var n2 = nums[i].ToString().PadLeft(maxDigits);
-                        Console.WriteLine($"{n1} + {n2} = {nums[i - 1] + nums[i]}");
+                        total += nums[i];
+                        Console.WriteLine($"{n1} + {n2} = {total}");
                     }
                     Console.ResetColor();
                 }
